@@ -50,6 +50,16 @@
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ],
+        "generate-models": [
+            "php artisan make:model Career -mc",
+            "php artisan make:model Semester -mc",
+            "php artisan make:model Student -mc",
+            "php artisan make:model Student_career -mc",
+            "php artisan make:model Student_semester -mc",
+            "php artisan make:model Pay_card -mc",
+            "php artisan make:model Fee -mc",
+            "php artisan make:model Pay -mc"
         ]
     },
     "extra": {
