@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('fees', function (Blueprint $table) {
             $table->id('id_fee');
-            $table->foreignId('id_student')->constrained('students', 'id_student');
             $table->float('amount', 2);
-            $table->date('due_date')->nullable();
-            $table->enum('status',['Pendiente', 'Pagado', 'Vencido'])->default('Pendiente');
             $table->string('description', 100);
-            $table->unique('id_student');
             $table->timestamps();
         });
     }
