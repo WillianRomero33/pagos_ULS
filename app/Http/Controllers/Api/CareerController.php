@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Career;
 use Illuminate\Http\Request;
 
-class CareerControllerAdmin extends Controller
+class CareerController extends Controller
 {
     public function index()
     {
