@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="flex items-center space-x-4">
-            <span class="font-medium">Bienvenido, {{ $userName ?? 'Estudiante' }}</span>
+            <span class="font-medium">Bienvenido, {{ $userName ?? 'Admin' }}</span>
             <button class="hover:text-gray-300 p-2 rounded-full bg-blue-800">
                 <i class="fas fa-user-circle text-xl"></i>
             </button>

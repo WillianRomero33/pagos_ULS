@@ -15,6 +15,6 @@ class StudentCareer extends Pivot
         'id_career',
         'enrollment_date',
         'graduation_date',
-        'active',
+        'is_active',
     ];
 }

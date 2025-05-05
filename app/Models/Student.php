@@ -12,10 +12,11 @@ class Student extends Model
     protected $table = 'students';
     protected $primaryKey = 'id_student';
     protected $fillable = [
+        'carnet',
         'name',
         'last_name',
         'email',
-        'active',
+        'is_active',
     ];
 
     // Relaciones

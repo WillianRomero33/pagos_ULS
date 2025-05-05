@@ -1,17 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StudentControllerAdmin;
+use App\Http\Controllers\CareerControllerAdmin;
+use App\Http\Controllers\SemesterControllerAdmin;
+use App\Http\Controllers\FeeControllerAdmin;
+use App\Http\Controllers\PaymentControllerAdmin;
 
 Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/careers/addCareer', function () {
-    return view('careers.addCareer');
-})->name('careers.addCareer');
-
-// colocar todas las rutas de blade,
-// api todas las rutas de la app mobile
-// php artisan install:api "Para retornar las rutas api
-// con blade, tengo que hacer 2 metodos, 1 para las rutas API y el otro para blade
+Route::resource('careers', CareerControllerAdmin::class);
+Route::resource('semesters', SemesterControllerAdmin::class);
+Route::resource('fees', FeeControllerAdmin::class);
+Route::resource('students', StudentControllerAdmin::class);
+Route::resource('payments', PaymentControllerAdmin::class);
