@@ -3,26 +3,49 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Student extends Model
 {
-    //
+    use HasFactory;
+
+    protected $table = 'students';
+    protected $primaryKey = 'id_student';
+    protected $fillable = [
+        'carnet',
+        'name',
+        'last_name',
+        'email',
+        'is_active',
+    ];
+
+    // Relaciones
     public function careers()
     {
-        return $this->belongsToMany(
-            Career::class, 'student_career', 
-            'id_student', 
-            'id_career')
-            ->withPivot('inscription_date', 'graduation_date', 'is_active');
+        return $this->belongsToMany(Career::class, 'student_careers', 'id_student', 'id_career')
+                    ->withTimestamps()
+                    ->withPivot('enrollment_date', 'graduation_date', 'active');
     }
 
     public function semesters()
     {
-        return $this->hasMany(
-            Semester::class, 'id_student');
+        return $this->belongsToMany(Semester::class, 'student_semesters', 'id_student', 'id_semester')
+                    ->withTimestamps()
+                    ->withPivot('start_date', 'end_date', 'status');
     }
+
+    public function fees()
+    {
+        return $this->hasMany(Fee::class, 'id_student');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'id_student');
+    }
+
     public function payCards()
     {
-        return $this->hasMany(Pay_card::class, 'id_student');
+        return $this->hasMany(PayCard::class, 'id_student');
     }
 }

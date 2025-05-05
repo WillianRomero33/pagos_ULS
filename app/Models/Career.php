@@ -3,21 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Career extends Model
 {
-    //
+    use HasFactory;
+
     protected $table = 'careers';
     protected $primaryKey = 'id_career';
-    
-    public function students(): BelongsToMany
+    protected $fillable = [
+        'career_name',
+        'total_semesters',
+    ];
+
+    // Relaciones
+    public function students()
     {
-        return $this->belongsToMany(
-            Student::class,
-            'student_career', 
-            'id_career', 
-            'id_student' 
-        )->withPivot(['inscription_date', 'graduation_date', 'is_active']);
+        return $this->belongsToMany(Student::class, 'student_careers', 'id_career', 'id_student')
+                    ->withTimestamps();
     }
 }
