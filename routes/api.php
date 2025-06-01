@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\CareerController;
 use App\Http\Controllers\Api\SemesterController;
 use App\Http\Controllers\Api\FeeController;
-use App\Http\Controllers\Api\PayCardController;
+use App\Http\Controllers\Api\PaymentCardController;
 use App\Http\Controllers\Api\PaymentController;
 
 Route::get('/user', function (Request $request) {
@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('fees', FeeController::class);
 
     // Tarjetas de pago
-    Route::apiResource('paycards', PayCardController::class);
+    Route::apiResource('PaymentCards', PaymentCardController::class);
 
     // Pagos
     Route::apiResource('payments', PaymentController::class)->only(['index', 'store', 'show']);

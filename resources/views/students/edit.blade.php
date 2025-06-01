@@ -29,9 +29,24 @@
                 <input type="email" name="email" id="email" value="{{ $student->email }}" class="w-full px-4 py-2 border rounded" required>
             </div>
 
-            <div class="flex items-center">
-                <input type="checkbox" id="active" name="active" class="mr-2" {{ $student->active ? 'checked' : '' }}>
-                <label for="active" class="font-medium">Activo</label>
+            <div class="mb-4">
+                <label for="id_career" class="block text-gray-700 font-medium mb-1">Carrera</label>
+                <select
+                name="id_career"
+                id="id_career"
+                class="w-full border rounded p-2 focus:outline-none focus:ring"
+                required
+                >
+                <option value="" disabled>Selecciona una carrera</option>
+                @foreach($careers as $career)
+                    <option value="{{ $career->id_career }}">
+                    {{ $career->career_name }}
+                    </option>
+                @endforeach
+                </select>
+                @error('id_career')
+                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex gap-2">

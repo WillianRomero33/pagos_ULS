@@ -6,6 +6,16 @@
     @include('components.sidebar')
     <main class="flex-1 p-6">
         <h1 class="text-2xl font-bold mb-6">Nuevo Estudiante</h1>
+        @if ($errors->any())
+        <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+            <strong class="block mb-2">Revisa los siguientes errores:</strong>
+            <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+        @endif
         <form action="{{ route('students.store') }}" method="POST" class="space-y-4 max-w-xl">
             @csrf
 
@@ -29,9 +39,24 @@
                 <input type="email" name="email" id="email" class="w-full px-4 py-2 border rounded" required>
             </div>
 
-            <div class="flex items-center">
-                <input type="checkbox" id="active" name="active" class="mr-2">
-                <label for="active" class="font-medium">Activo</label>
+            <div class="mb-4">
+                <label for="id_career" class="block text-gray-700 font-medium mb-1">Carrera</label>
+                <select
+                name="id_career"
+                id="id_career"
+                class="w-full border rounded p-2 focus:outline-none focus:ring"
+                required
+                >
+                <option value="" disabled selected>Selecciona una carrera</option>
+                @foreach($careers as $career)
+                    <option value="{{ $career->id_career }}">
+                    {{ $career->career_name }}
+                    </option>
+                @endforeach
+                </select>
+                @error('id_career')
+                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex gap-2">

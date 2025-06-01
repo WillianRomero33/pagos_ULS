@@ -12,14 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id('id_pay');
-            $table->foreignId('id_student')->constrained('students', 'id_student');
-            $table->foreignId('id_card')->nullable()->constrained('pay_cards', 'id_pay_card');
-            $table->dateTime('payment_date');
-            $table->enum('payment_type', ['Tarjeta', 'Efectivo', 'Transferencia']);
-            $table->decimal('amount', 10, 2);
+            $table->id('id_payment');
+            $table->foreignId('id_payment_card')->nullable()->constrained('payment_cards', 'id_payment_card');
+            $table->dateTime('payment_date')->nullable();
+            $table->enum('payment_type', ['Tarjeta', 'Efectivo', 'Transferencia'])->nullable();
             $table->string('transaction_code', 50)->nullable();
-            $table->enum('status', ['completado', 'pendiente', 'fallido', 'reembolsado'])->default('pendiente');
             $table->string('receipt_number', 20)->nullable();
             $table->timestamps();
         });

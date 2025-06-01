@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pay_cards', function (Blueprint $table) {
-            $table->id('id_pay_card');
-            $table->foreignId('id_student')->constrained('students', 'id_student');
+        Schema::create('payment_cards', function (Blueprint $table) {
+            $table->id('id_payment_card');
+            $table->foreignId('student_id')->constrained('students', 'id_student');
             $table->binary('encrypted_card_number');
             $table->binary('encrypted_due_date');
             $table->binary('encrypted_cvv');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pay_cards');
+        Schema::dropIfExists('payment_cards');
     }
 };

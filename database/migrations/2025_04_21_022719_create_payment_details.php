@@ -13,14 +13,19 @@ return new class extends Migration
     {
         Schema::create('payment_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pay');
+            $table->foreignId('id_student')->constrained('students', 'id_student');
+            $table->unsignedBigInteger('id_payment')->nullable();
+            $table->unsignedBigInteger('id_semester');
             $table->unsignedBigInteger('id_fee');
+            $table->unsignedBigInteger('id_month')->nullable();
             $table->decimal('amount', 10, 2);
+            $table->enum('status', ['completado', 'pendiente', 'fallido', 'reembolsado'])->default('pendiente');
             $table->timestamps();
 
             // Foreign Keys
-            $table->foreign('id_pay')
-                  ->references('id_pay')
+            $table->foreign('id_payment')
+                  ->nullable()
+                  ->references('id_payment')
                   ->on('payments')
                   ->onDelete('cascade');
 
@@ -28,6 +33,15 @@ return new class extends Migration
                   ->references('id_fee')
                   ->on('fees')
                   ->onDelete('cascade');
+
+            $table->foreign('id_semester')
+                  ->references('id_semester')
+                  ->on('semesters')
+                  ->onDelete('cascade');
+
+            $table->foreign('id_month')
+                  ->references('id')
+                  ->on('month');
         });
     }
 

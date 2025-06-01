@@ -12,19 +12,24 @@ class Student extends Model
     protected $table = 'students';
     protected $primaryKey = 'id_student';
     protected $fillable = [
+        'id_user',
         'carnet',
         'name',
         'last_name',
         'email',
-        'is_active',
+        'active',
     ];
 
     // Relaciones
+    public function user() {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
     public function careers()
     {
         return $this->belongsToMany(Career::class, 'student_careers', 'id_student', 'id_career')
                     ->withTimestamps()
-                    ->withPivot('enrollment_date', 'graduation_date', 'active');
+                    ->withPivot('inscription_date', 'graduation_date', 'active');
     }
 
     public function semesters()
@@ -34,18 +39,13 @@ class Student extends Model
                     ->withPivot('start_date', 'end_date', 'status');
     }
 
-    public function fees()
+    public function paymentDetails()
     {
-        return $this->hasMany(Fee::class, 'id_student');
+        return $this->hasMany(PaymentDetail::class, 'id_student');
     }
 
-    public function payments()
+    public function paymentCards()
     {
-        return $this->hasMany(Payment::class, 'id_student');
-    }
-
-    public function payCards()
-    {
-        return $this->hasMany(PayCard::class, 'id_student');
+        return $this->hasMany(PaymentCard::class, 'id_student');
     }
 }

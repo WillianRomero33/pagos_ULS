@@ -14,6 +14,9 @@
             <a href="{{ route('fees.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-blue-100 rounded">
                 Cargos
             </a>
+            <a href="{{ route('payments.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-blue-100 rounded">
+                Cobros
+            </a>
         </nav>
     </div>
 </aside>

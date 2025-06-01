@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id('id_student');
-            $table->string('carnet', lenght:10)->unique();
+            $table->foreignId('id_user')->constrained('users', 'id');
+            $table->string('carnet', 10)->unique();
             $table->string('name', 50);
             $table->string('last_name', 50);
             $table->string('email', 50)->unique();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

@@ -10,6 +10,16 @@
       @if(isset($semester)) @method('PUT') @endif
 
       <div class="mb-4">
+        <label class="block font-semibold">Año</label>
+        <select name="year" id="year" class="w-full border rounded p-2 focus:outline-none focus:ring" required>
+          <option value="" disabled selected>Selecciona un año</option>
+          @for ($i = date('Y'); $i >= 2020; $i--)
+            <option value="{{ $i }}" {{ isset($semester) && $semester->year == $i ? 'selected' : '' }}>{{ $i }}</option>
+          @endfor
+        </select>
+      </div>
+
+      <div class="mb-4">
         <label class="block font-semibold">Número de semestre</label>
         <input name="semester_number" type="number" class="w-full border rounded px-4 py-2" value="{{ old('semester_number', $semester->semester_number ?? '') }}" required>
       </div>

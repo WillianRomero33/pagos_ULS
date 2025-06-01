@@ -12,29 +12,21 @@ class Payment extends Model
     protected $table = 'payments';
     protected $primaryKey = 'id_pay';
     protected $fillable = [
-        'id_student',
         'id_card',
         'payment_date',
         'payment_type',
-        'amount',
         'transaction_code',
-        'status',
         'receipt_number',
     ];
 
     // Relaciones
-    public function student()
-    {
-        return $this->belongsTo(Student::class, 'id_student');
-    }
-
     public function card()
     {
-        return $this->belongsTo(PayCard::class, 'id_card');
+        return $this->belongsTo(PaymentCard::class, 'id_payment_card');
     }
 
     public function paymentDetails()
     {
-        return $this->hasMany(PaymentDetail::class, 'id_pay');
+        return $this->hasMany(PaymentDetail::class, 'id_payment');
     }
 }

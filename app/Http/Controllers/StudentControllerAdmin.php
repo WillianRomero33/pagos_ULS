@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Career;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 class StudentControllerAdmin extends Controller
 {
@@ -16,7 +20,8 @@ class StudentControllerAdmin extends Controller
 
     public function create()
     {
-        return view('students.create');
+        $careers = Career::all();
+        return view('students.create', compact('careers'));
     }
 
     public function store(Request $request)
@@ -26,19 +31,31 @@ class StudentControllerAdmin extends Controller
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email',
+            'id_career' => 'required|exists:careers,id_career',
+        ]);
+
+        $user = User::create([
+            'email'    => $validated['carnet'].'@uls.edu.sv',
+            'password' => Hash::make('1234'),
         ]);
         
+        // 3) Creamos el estudiante sin el id_career
+        $studentData = Arr::except($validated, ['id_career']);
+        $studentData['id_user'] = $user->id; // Asignamos el id del usuario creado
+        $student = Student::create($studentData);
 
-        $validated['active'] = $request->has('active');
+        // 4) Insertamos en la tabla pivote student_careers
+        $student->careers()->attach($validated['id_career'], ['inscription_date' => now()]);
 
-        Student::create($validated);
-
-        return redirect()->route('students.index')->with('success', 'Estudiante creado exitosamente.');
+        return redirect()
+            ->route('students.index')
+            ->with('success', 'Estudiante creado y matriculado correctamente.');
     }
 
     public function edit(Student $student)
     {
-        return view('students.edit', compact('student'));
+        $careers = Career::all();
+        return view('students.edit', compact('student', 'careers'));
     }
 
     public function update(Request $request, Student $student)
@@ -48,11 +65,11 @@ class StudentControllerAdmin extends Controller
             'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email,' . $student->id_student . ',id_student',
+            'id_career' => 'required|exists:careers,id_career',
         ]);
 
-        $validated['active'] = $request->has('active');
-
-        $student->update($validated);
+        $student->update(Arr::except($validated, ['id_career']));
+        $student->careers()->sync([$validated['id_career']]);
 
         return redirect()->route('students.index')->with('success', 'Estudiante actualizado exitosamente.');
     }

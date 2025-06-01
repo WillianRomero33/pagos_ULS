@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_career')->constrained('careers', 'id_career');
             $table->date('inscription_date');
             $table->date('graduation_date')->nullable();    
-            $table->boolean('is_active')->default(true);
+            $table->boolean('active')->default(true);
             $table->unique(['id_student','id_career']);
             $table->timestamps();
         });

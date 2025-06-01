@@ -8,11 +8,12 @@ use App\Models\PaymentDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PaymentControllerAdmin extends Controller
+class PaymentDetailControllerAdmin extends Controller
 {
     public function index()
     {
-        return response()->json(Payment::with('paymentDetails')->get());
+        $charges = PaymentDetail::all();
+        return view('charges.index', compact('charges'));
     }
 
     public function store(Request $request)
@@ -29,7 +30,7 @@ class PaymentControllerAdmin extends Controller
 
             foreach ($request->payment_details as $detail) {
                 PaymentDetail::create([
-                    'id_pay' => $payment->id_pay,
+                    'id_payment' => $payment->id_payment,
                     'id_fee' => $detail['id_fee'],
                     'amount' => $detail['amount'],
                 ]);

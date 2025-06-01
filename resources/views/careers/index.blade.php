@@ -32,7 +32,7 @@
                             <td class="py-2 px-4 border-b text-center">{{ $career->career_name }}</td>
                             <td class="py-2 px-4 border-b text-center">{{ $career->total_semesters }}</td>
                             <td class="py-2 px-4 border-b space-x-2 text-center">
-                                <a href="{{ route('careers.edit', $career) }}" class="text-yellow-600 hover:underline">Editar</a>
+                                <a href="{{ route('careers.edit', $career) }}" class="text-blue-600 hover:underline">Editar</a>
                                 <form action="{{ route('careers.destroy', $career) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')

@@ -23,7 +23,8 @@ class SemesterControllerAdmin extends Controller
     {
         $validated = $request->validate([
             'semester_number' => 'required|integer|min:1',
-            'duration_months' => 'required|integer|min:1'
+            'duration_months' => 'required|integer|min:1',
+            'year' => 'required|integer|min:2020|max:'.date('Y'),
         ]);
 
         Semester::create($validated);
@@ -39,7 +40,8 @@ class SemesterControllerAdmin extends Controller
     {
         $validated = $request->validate([
             'semester_number' => 'required|integer|min:1',
-            'duration_months' => 'required|integer|min:1'
+            'duration_months' => 'required|integer|min:1',
+            'year' => 'required|integer|min:2020|max:'.date('Y'),
         ]);
 
         $semester->update($validated);

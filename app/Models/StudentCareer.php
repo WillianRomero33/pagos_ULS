@@ -13,8 +13,8 @@ class StudentCareer extends Pivot
     protected $fillable = [
         'id_student',
         'id_career',
-        'enrollment_date',
+        'inscription_date',
         'graduation_date',
-        'is_active',
+        'active',
     ];
 }

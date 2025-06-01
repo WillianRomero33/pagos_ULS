@@ -16,8 +16,8 @@
     <table class="min-w-full border text-left">
       <thead class="bg-gray-100">
         <tr>
-          <th class="px-4 py-2">#</th>
-          <th class="px-4 py-2">Número</th>
+          <th class="px-4 py-2">Año</th>
+          <th class="px-4 py-2">Semestre</th>
           <th class="px-4 py-2">Duración (meses)</th>
           <th class="px-4 py-2">Acciones</th>
         </tr>
@@ -25,7 +25,7 @@
       <tbody>
         @foreach($semesters as $s)
         <tr class="border-t">
-          <td class="px-4 py-2">{{ $s->id_semester }}</td>
+          <td class="px-4 py-2">{{ $s->year}}</td>
           <td class="px-4 py-2">{{ $s->semester_number }}</td>
           <td class="px-4 py-2">{{ $s->duration_months }}</td>
           <td class="px-4 py-2 space-x-2">

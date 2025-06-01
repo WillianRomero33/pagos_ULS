@@ -22,30 +22,38 @@
                         <th class="py-2 px-4 border-b">ID</th>
                         <th class="py-2 px-4 border-b">Nombre</th>
                         <th class="py-2 px-4 border-b">Email</th>
+                        <th class="py-2 px-4 border-b">Carrera</th>
                         <th class="py-2 px-4 border-b">Estado</th>
                         <th class="py-2 px-4 border-b">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($students as $student)
-                        <tr>
+                        <tr class="text-center">
                             <td class="py-2 px-4 border-b">{{ $student->carnet }}</td>
                             <td class="py-2 px-4 border-b">{{ $student->name }} {{ $student->last_name }}</td>
                             <td class="py-2 px-4 border-b">{{ $student->email }}</td>
+                            <td class="py-2 px-4 border-b">{{ $student->careers->first()->career_name }}</td>
                             <td class="py-2 px-4 border-b">
                                 @if($student->active)
-                                    <span class="text-red-600 font-semibold">Inactivo</span>
-                                @else
                                     <span class="text-green-600 font-semibold">Activo</span>
+                                @else
+                                    <span class="text-red-600 font-semibold">Inactivo</span>
                                 @endif
                             </td>
                             <td class="py-2 px-4 border-b space-x-2">
-                                <a href="{{ route('students.edit', $student) }}" class="text-yellow-600 hover:underline">Editar</a>
+                                <a href="{{ route('students.edit', $student) }}" class="text-blue-600 hover:underline">Editar</a>
+                                <a href="{{ route('students.enroll.create', ['student' => $student->id_student]) }}" 
+                                    class="text-green-600 hover:underline"
+                                    >
+                                    Matricular
+                                </a>
                                 <form action="{{ route('students.destroy', $student) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="text-red-600 hover:underline" onclick="return confirm('¿Eliminar este estudiante?')">Eliminar</button>
                                 </form>
+
                             </td>
                         </tr>
                     @endforeach

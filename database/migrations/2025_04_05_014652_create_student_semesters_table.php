@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('id_semester')->constrained('semesters', 'id_semester');
             $table->date('start_date');
             $table->date('end_date')->nullable();    
-            $table->boolean('is_active')->default(true);
+            $table->boolean('active')->default(true);
             $table->enum('status', ['En curso', 'Completado', 'Abandonado'])->default('En curso');
             $table->unique(['id_student','id_semester']);
             $table->timestamps();

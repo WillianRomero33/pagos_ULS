@@ -12,7 +12,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        return response()->json(Payment::with('paymentDetails')->get());
+        return response()->json(PaymentDetail::where('id_student',4)->get());
     }
 
     public function store(Request $request)
@@ -29,7 +29,7 @@ class PaymentController extends Controller
 
             foreach ($request->payment_details as $detail) {
                 PaymentDetail::create([
-                    'id_pay' => $payment->id_pay,
+                    'id_payment' => $payment->id_payment,
                     'id_fee' => $detail['id_fee'],
                     'amount' => $detail['amount'],
                 ]);

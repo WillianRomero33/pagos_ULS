@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('semesters', function (Blueprint $table) {
-            $table->id('id_semester');
-            $table->integer('semester_number');
-            $table->integer('duration_months');
-            $table->integer('year');
-            $table->boolean('is_active')->default(true);
+        Schema::create('month', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('semesters');
+        Schema::dropIfExists('month');
     }
 };
