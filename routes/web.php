@@ -8,9 +8,7 @@ use App\Http\Controllers\FeeControllerAdmin;
 use App\Http\Controllers\PaymentDetailControllerAdmin;
 use App\Http\Controllers\EnrollmentController;
 
-Route::get('/', function () {
-    return view('students.index');
-})->name('dashboard');
+Route::redirect('/',  '/students');
 
 Route::resource('careers', CareerControllerAdmin::class);
 Route::resource('semesters', SemesterControllerAdmin::class);
