@@ -8,7 +8,7 @@ use App\Http\Controllers\FeeControllerAdmin;
 use App\Http\Controllers\PaymentDetailControllerAdmin;
 use App\Http\Controllers\EnrollmentController;
 
-Route::redirect('/', 'students', 301);
+Route::redirect('/',  '/students');
 
 Route::resource('careers', CareerControllerAdmin::class);
 Route::resource('semesters', SemesterControllerAdmin::class);
