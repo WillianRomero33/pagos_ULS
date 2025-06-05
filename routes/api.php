@@ -29,7 +29,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('fees', FeeController::class);
 
     // Tarjetas de pago
-    Route::apiResource('PaymentCards', PaymentCardController::class);
+    Route::apiResource('paymentcards', PaymentCardController::class);
 
     // Pagos
     Route::apiResource('payments', PaymentController::class)->only(['index', 'store', 'show']);

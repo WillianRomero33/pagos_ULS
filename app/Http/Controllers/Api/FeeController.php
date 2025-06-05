@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fee;
+use App\Models\PaymentDetail;
 use Illuminate\Http\Request;
 
 class FeeController extends Controller
@@ -21,7 +22,7 @@ class FeeController extends Controller
 
     public function show($id)
     {
-        $fee = Fee::findOrFail($id);
+        $fee = PaymentDetail::where("id_student",$id)->with("fee")->with("semester")->with("month")->get();
         return response()->json($fee);
     }
 

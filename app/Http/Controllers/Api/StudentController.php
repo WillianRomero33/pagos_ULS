@@ -19,9 +19,9 @@ class StudentController extends Controller
         return response()->json($student, 201);
     }
 
-    public function show($id)
+    public function show($carnet)
     {
-        $student = Student::findOrFail($id);
+        $student = Student::where('carnet', $carnet)->with("careers")->first();
         return response()->json($student);
     }
 
